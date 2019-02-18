@@ -4,19 +4,20 @@
 %modulo a prime p using the classic algorithm for polynomial division
 
 %we devide a by b (def a >= deg b)
-a = [1 1 1 0 1]; %polynomial coefficients ordered by descending power
-b = [1 0 1];
+a = [7 5 9 3 1 8 9 2 3 5 4]; %polynomial coefficients ordered by descending power
+b = [8 5 4 7 1 5 5 7 5];
 %modulo p
-p = 2;
+p = 13;
 
 main_division(a, b, p);
-
+main_division(a_s, b_s, p);
 
 function[eta, r] = main_division(a, b, p)
     n = length(a);
     m = length(b);
     mu = get_inverse(b(1), p);
     r = a;
+    r
     for j = 1:n-m+1
         i = (n-m+1)-j+1;
         fprintf("Iteration %i\n", i-1);
@@ -25,8 +26,8 @@ function[eta, r] = main_division(a, b, p)
             eta = mod(eta, p);
             fprintf("eta: %i\n",eta);
             r = subtract(r, eta*([b zeros(1,i-1)]));
-            r = remove_leading_zeros(r);
             r = mod(r, p);
+            r = remove_leading_zeros(r);
             r
         else
             eta = 0;
